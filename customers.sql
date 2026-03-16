@@ -52,8 +52,57 @@ INSERT INTO `customers` (`customer_id`, `customer_name`, `city`, `membership_lev
 (10, 'Julia', 'Cebu', 'Bronze', '2025-04-15');
 
 --
--- Indexes for dumped tables
---
+-- 1.List all customers from Cebu.
+SELECT * FROM Customers WHERE City = 'Cebu';
+
+--2. Find all Gold membership customers.
+SELECT * FROM Customers WHERE Membership = 'Gold';
+
+
+--3. List customers whose names start with “A” or “D”.
+SELECT * FROM Customers WHERE CustomerName LIKE 'A%' OR CustomerName LIKE 'D%';
+
+
+--4. Find customers from Cebu who have Silver or Gold membership.
+SELECT * FROM Customers WHERE City = 'Cebu' AND (Membership = 'Silver' OR Membership = 'Gold');
+
+
+--5. Select customers who joined between 2025-02-01 and 2025-03-31.
+SELECT * FROM Customers WHERE JoinDate BETWEEN '2025-02-01' AND '2025-03-31';
+
+
+--6. Find customers from either Bohol or Tagbilaran with Bronze membership.
+SELECT * FROM Customers WHERE City IN ('Bohol', 'Tagbilaran') AND Membership = 'Bronze';
+
+
+--7. List all customers whose names contain the letter “a” (case-insensitive).
+SELECT * FROM Customers WHERE CustomerName LIKE '%a%';
+
+
+--8. Find all customers from Cebu who are Gold members and joined before March 2025.
+SELECT * FROM Customers WHERE City = 'Cebu' AND Membership = 'Gold' AND JoinDate < '2025-03-01';
+
+
+--9. List all customers from Bohol or Tagbilaran who joined on or before February 2025 and have
+--Silver or Bronze membership.
+
+SELECT * FROM Customers 
+WHERE City IN ('Bohol', 'Tagbilaran') 
+AND JoinDate <= '2025-02-28' 
+AND Membership IN ('Silver', 'Bronze');
+
+
+--10. Select all customers except those whose customer_id is 1, 4, or 6, and who joined after
+--February 2025.
+SELECT * FROM Customers 
+WHERE CustomerID NOT IN (1, 4, 6) 
+AND JoinDate > '2025-02-28';
+
+
+--11. List customers who joined in April 2025, are from Cebu or Bohol, and are not Bronze members.
+SELECT * FROM Customers 
+WHERE JoinDate BETWEEN '2025-04-01' AND '2025-04-30'
+AND City IN ('Cebu', 'Bohol')
 
 --
 -- Indexes for table `customers`
